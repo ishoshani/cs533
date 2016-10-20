@@ -4,7 +4,7 @@
 #include <stdio.h>
 struct thread * current_thread;
 struct queue * ready_list;
-void thread_start(){
+void scheduler_begin(){
 	current_thread=malloc(sizeof(struct thread));
 	current_thread->state=RUNNING;
 	ready_list=malloc(sizeof(struct queue));
