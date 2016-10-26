@@ -13,12 +13,10 @@ void scheduler_begin(){
 
 }
 void scheduler_end(){
-  if(is_empty(ready_list)){
-    free(current_thread);
-    free(ready_list);
-    return;
-  }
-  yield();
+if(!is_empty(ready_list)){
+yield();
+}
+return;
 }
 void thread_fork(void(*target)(void*), void * arg){
   struct thread * new; 
@@ -46,7 +44,7 @@ void yield() {
     temp = current_thread;
     current_thread = new;
     thread_switch(temp, current_thread);
-  }
+	}
 void thread_wrap() {
     current_thread->initial_function(current_thread->initial_argument);
     yield();
