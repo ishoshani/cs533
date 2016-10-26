@@ -1,7 +1,8 @@
 #include "scheduler.h"
 #include <stdio.h>
 void print_nth_prime(void * pn){
-  int n = *(int *) pn;
+  printf("goooo");
+	int n = *(int *) pn;
   int c = 1, i = 1;
   while(c <= n) {
     ++i;

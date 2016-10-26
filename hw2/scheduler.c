@@ -14,7 +14,7 @@ void scheduler_begin(){
 
 }
 void scheduler_end(){
-if(!is_empty(ready_list)){
+while(!is_empty(ready_list)){
 yield();
 }
 return;
@@ -49,5 +49,6 @@ void yield() {
 	}
 void thread_wrap() {
     current_thread->initial_function(current_thread->initial_argument);
-    yield();
+    current_thread->state=DONE;
+	 yield();
  }
