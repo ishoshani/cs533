@@ -4,6 +4,7 @@
 #include <stdio.h>
 struct thread * current_thread;
 struct queue * ready_list;
+int STACK_SIZE=1024*1024;
 void scheduler_begin(){
 	current_thread=malloc(sizeof(struct thread));
 	current_thread->state=RUNNING;
@@ -13,18 +14,19 @@ void scheduler_begin(){
 
 }
 void scheduler_end(){
-  if(is_empty(ready_list)){
-    free(current_thread);
-    free(ready_list);
-    return;
-  }
-  yield();
+while(!is_empty(ready_list)){
+yield();
+}
+return;
 }
 void thread_fork(void(*target)(void*), void * arg){
-  struct thread * new; 
-  new_Thread = malloc(sizeof(struct thread));
-  new_Thread->initial_function=target;
-  new_Thread->initial_argument=arg;
+  struct thread * new;
+
+  new = malloc(sizeof(struct thread));
+  new->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
+  new->initial_function=target;
+  new->initial_argument=arg;
+
   current_thread->state=READY;
   thread_enqueue(ready_list,current_thread);
   new->state=RUNNING;
@@ -46,8 +48,9 @@ void yield() {
     temp = current_thread;
     current_thread = new;
     thread_switch(temp, current_thread);
-  }
+	}
 void thread_wrap() {
     current_thread->initial_function(current_thread->initial_argument);
-    yield();
+    current_thread->state=DONE;
+	 yield();
  }
