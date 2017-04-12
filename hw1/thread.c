@@ -14,13 +14,24 @@ int main(){
   	current_thread->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
   	//current_thread->initial_function(current_thread->initial_argument);
   	thread_start(inactive_thread,current_thread);
+	free(current_thread);
+	free(inactive_thread);
+	free(p);
 }
 int increment(int a){
 	return a+1;
 }
+int powerofTwo(int a){
+	int p = 1;
+	for(int i =0; i<a;i++){
+		p *=2;
+	}
+	return p;
+}
+
 void threadincrement(void * a){
 	int n = *(int*) a;
-	printf("%d is %d incremented",increment(n),n);
+	printf("%d is %d power of two",powerofTwo(n),n);
 }
 void thread_wrap() {
     current_thread->initial_function(current_thread->initial_argument);

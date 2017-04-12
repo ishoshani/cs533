@@ -28,4 +28,3 @@ thread_start:
 	movq %rsp, (%rdi)		#save stack pointer into old's thread control block
 	movq (%rsi), %rsp 	#move new threads control block onto the stack pointer
 	jmp thread_wrap
-

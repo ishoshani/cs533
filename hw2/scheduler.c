@@ -22,15 +22,15 @@ void scheduler_end(){
 }
 void thread_fork(void(*target)(void*), void * arg){
   struct thread * new; 
-  new = malloc(sizeof(struct thread));
-  new->initial_function=target;
-  new->initial_argument=arg;
+  new_Thread = malloc(sizeof(struct thread));
+  new_Thread->initial_function=target;
+  new_Thread->initial_argument=arg;
   current_thread->state=READY;
   thread_enqueue(ready_list,current_thread);
   new->state=RUNNING;
   struct thread * temp;
   temp = current_thread;
-  current_thread = new;
+  current_thread = new_Thread;
   thread_start(temp, current_thread);
 }
 
