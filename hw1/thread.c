@@ -14,7 +14,9 @@ int main(){
   	current_thread->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
   	//current_thread->initial_function(current_thread->initial_argument);
   	thread_start(inactive_thread,current_thread);
-	while()
+	free(current_thread)
+	free(inactive_thread)
+	free(p)
 }
 int increment(int a){
 	return a+1;
@@ -34,8 +36,7 @@ void threadincrement(void * a){
 void thread_wrap() {
     current_thread->initial_function(current_thread->initial_argument);
 		struct thread * temp = current_thread;
-		free(temp->initial_argument);
-		free(temp->stack_pointer);
+		free(temp);
     yield();
   }
 void yield() {
