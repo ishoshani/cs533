@@ -20,7 +20,7 @@ yield();
 return;
 }
 void thread_fork(void(*target)(void*), void * arg){
-  struct thread * new;
+  struct thread * new_Thread;
 
   new_Thread = malloc(sizeof(struct thread));
   new_Thread->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
