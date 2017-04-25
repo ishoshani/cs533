@@ -22,14 +22,14 @@ return;
 void thread_fork(void(*target)(void*), void * arg){
   struct thread * new;
 
-  new = malloc(sizeof(struct thread));
-  new->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
-  new->initial_function=target;
-  new->initial_argument=arg;
+  new_Thread = malloc(sizeof(struct thread));
+  new_Thread->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
+  new_Thread->initial_function=target;
+  new_Thread->initial_argument=arg;
 
   current_thread->state=READY;
   thread_enqueue(ready_list,current_thread);
-  new->state=RUNNING;
+  new_Thread->state=RUNNING;
   struct thread * temp;
   temp = current_thread;
   current_thread = new_Thread;

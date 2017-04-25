@@ -12,7 +12,6 @@ struct thread{
 };
 void scheduler_begin();
 void thread_fork(void(*target)(void*), void * arg);
-void thread_wrap();
 void yield();
 void scheduler_end();
 extern struct thread * current_thread;
