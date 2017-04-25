@@ -12,11 +12,13 @@ int main(){
  	*p = 5;
   	current_thread->initial_argument = p;
   	current_thread->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
+		current_thread->original_pointer = current_thread->stack_pointer - STACK_SIZE
   	//current_thread->initial_function(current_thread->initial_argument);
   	thread_start(inactive_thread,current_thread);
-	free(current_thread)
-	free(inactive_thread)
-	free(p)
+	free(current_thread);
+	free(current_thread);
+	free(inactive_thread);
+	free(p);
 }
 int increment(int a){
 	return a+1;
