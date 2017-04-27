@@ -11,14 +11,13 @@ int main(){
 	int * p = malloc(sizeof(int));
  	*p = 5;
   	current_thread->initial_argument = p;
-  	current_thread->stack_pointer = malloc(STACK_SIZE) + STACK_SIZE;
-		current_thread->original_pointer = current_thread->stack_pointer - STACK_SIZE
-  	//current_thread->initial_function(current_thread->initial_argument);
+		unsigned char* original_pointer = malloc(STACK_SIZE)
+  	current_thread->stack_pointer = original_pointer + STACK_SIZE;
   	thread_start(inactive_thread,current_thread);
-	free(current_thread);
-	free(current_thread);
-	free(inactive_thread);
 	free(p);
+	free(original_pointer);
+	free(inactive_thread);
+	free(current_thread);
 }
 int increment(int a){
 	return a+1;
