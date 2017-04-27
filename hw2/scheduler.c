@@ -18,9 +18,9 @@ void scheduler_end(){
 while(!is_empty(ready_list)){
 yield();
 }
-free(stackOrigin)
-free(ready_list)
-free(current_thread)
+free(stackOrigin);
+free(ready_list);
+free(current_thread);
 return;
 }
 void thread_fork(void(*target)(void*), void * arg){
