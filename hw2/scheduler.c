@@ -4,7 +4,7 @@
 #include <stdio.h>
 struct thread * current_thread;
 struct queue * ready_list;
-int * stackOrigin;
+unsigned char* stackOrigin;
 int STACK_SIZE=1024*1024;
 void scheduler_begin(){
 	current_thread=malloc(sizeof(struct thread));
@@ -18,7 +18,9 @@ void scheduler_end(){
 while(!is_empty(ready_list)){
 yield();
 }
-
+free(stackOrigin)
+free(ready_list)
+free(current_thread)
 return;
 }
 void thread_fork(void(*target)(void*), void * arg){
