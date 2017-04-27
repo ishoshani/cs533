@@ -12,6 +12,8 @@ void scheduler_begin(){
 	ready_list=malloc(sizeof(struct queue));
 	ready_list->head = NULL;
 	ready_list->tail = NULL;
+	stackOrigin = malloc(STACK_SIZE);
+
 
 }
 void scheduler_end(){
@@ -27,7 +29,6 @@ void thread_fork(void(*target)(void*), void * arg){
   struct thread * new_Thread;
 
   new_Thread = malloc(sizeof(struct thread));
-	stackOrigin = malloc(STACK_SIZE);
   new_Thread->stack_pointer = stackOrigin + STACK_SIZE;
   new_Thread->initial_function=target;
   new_Thread->initial_argument=arg;
