@@ -20,7 +20,6 @@ void scheduler_end(){
 while(!is_empty(ready_list)){
 yield();
 }
-free(stackOrigin);
 free(ready_list);
 free(current_thread);
 return;
@@ -47,13 +46,23 @@ void yield() {
     {
       current_thread->state=READY;
       thread_enqueue(ready_list,current_thread);
+			struct thread * new = thread_dequeue(ready_list);
+			new->state=RUNNING;
+			struct thread * temp;
+			temp = current_thread;
+			current_thread = new;
+			thread_switch(temp, current_thread);
     }
+		else{
+
     struct thread * new = thread_dequeue(ready_list);
     new->state=RUNNING;
     struct thread * temp;
     temp = current_thread;
     current_thread = new;
+		free(stackOrigin);
     thread_switch(temp, current_thread);
+		}
 	}
 void thread_wrap() {
     current_thread->initial_function(current_thread->initial_argument);
