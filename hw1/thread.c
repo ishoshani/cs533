@@ -11,7 +11,7 @@ int main(){
 	int * p = malloc(sizeof(int));
  	*p = 5;
   	current_thread->initial_argument = p;
-		unsigned char* original_pointer = malloc(STACK_SIZE)
+		unsigned char* original_pointer = malloc(STACK_SIZE);
   	current_thread->stack_pointer = original_pointer + STACK_SIZE;
   	thread_start(inactive_thread,current_thread);
 	free(p);
