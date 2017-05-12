@@ -1,4 +1,6 @@
 #include "scheduler.h"
+#include <stdlib.h>
+#include <stdio.h>
 #include <aio.h>
 #include <errno.h>
 #include <unistd.h>
