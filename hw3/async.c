@@ -12,5 +12,5 @@ ssize_t read_wrap(int fd, void * buf, size_t count){
   controlblock->aio_buf= buf;
   controlblock->aio_nbytes= count;
   controlblock->aio_sigevent.sigev_notify=SIGEV_NONE;
-
+  return aio_read(controlblock)
 }
