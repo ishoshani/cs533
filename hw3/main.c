@@ -3,7 +3,7 @@
 #include <fcntl.h>
 
 void print_nth_prime(void * pn){
-  printf("goooo");
+  printf("goooo\n");
   int c = 1, i = 1;
   char buf[20];
   size_t nbytes = sizeof(buf);
