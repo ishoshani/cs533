@@ -1,5 +1,7 @@
 #include "scheduler.h"
 #include <stdio.h>
+#include <fcntl.h>
+
 void print_nth_prime(void * pn){
   printf("goooo");
   int c = 1, i = 1;
