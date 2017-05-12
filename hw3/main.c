@@ -10,7 +10,7 @@ void print_nth_prime(void * pn){
   ssize_t bytesread;
   int filedesc = open("reader.txt",O_RDONLY);
   bytesread= (filedesc, buf, nbytes);
-  put(buf);
+  puts(buf);
 }
 
 
