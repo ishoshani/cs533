@@ -5,12 +5,12 @@
 void print_nth_prime(void * pn){
   printf("goooo\n");
   int c = 1, i = 1;
-  char buf[20];
+  char buf[1];
   size_t nbytes = sizeof(buf);
   ssize_t bytesread;
   int filedesc = open("reader.txt",O_RDONLY);
   bytesread= (filedesc, buf, nbytes);
-  printf("%lu,%s\n", bytesread,buf);
+  printf("%lu,%c\n", bytesread,buf);
 }
 
 
