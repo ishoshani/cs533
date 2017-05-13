@@ -41,7 +41,7 @@ void read_from_user(void * pn){
 void read_from_file(void * offsetpn) {
   int offset = *(int *) offsetpn;
   char buf[20];
-  char abuff[20];
+  char abuf[20];
   size_t nbytes = sizeof(buf);
   ssize_t bytesread,asyncbytesRead;
   int filedesc = open("reader.txt", O_RDONLY);
