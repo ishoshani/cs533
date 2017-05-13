@@ -12,7 +12,7 @@ void read_from_reader(void * pn){
   int filedesc = open("reader.txt",O_RDONLY);
   bytesread= read(filedesc, buf, nbytes);
   for (i = 0; i < nbytes; i++) {
-    printf(" %02hhX", buf[i]);
+    printf(" %c", buf[i]);
   }
 }
 
