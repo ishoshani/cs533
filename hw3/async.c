@@ -4,6 +4,7 @@
 #include <errno.h>
 #include <unistd.h>
 #include <string.h>
+#include "scheduler.h"
 
 ssize_t read_wrap(int fd, void * buf, size_t count){
   struct aiocb * controlblock = malloc(sizeof(struct aiocb));
