@@ -10,10 +10,8 @@ void print_nth_prime(void * pn){
   ssize_t bytesread;
   int filedesc = open("reader.txt",O_RDONLY);
   bytesread= (filedesc, buf, nbytes);
-  for (i = 0; i < 20; i++) {
-    printf("%d", buf[i]);
-    // On older compilers use --> printf(" %02X", (unsigned) ptr[i]);
-  }
+  printf("%.*s", 20, buf);
+
 }
 
 
