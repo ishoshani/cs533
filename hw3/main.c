@@ -11,7 +11,7 @@ void print_nth_prime(void * pn){
   int filedesc = open("reader.txt",O_RDONLY);
   bytesread= (filedesc, buf, nbytes);
   for (i = 0; i < nbytes; i++) {
-    printf(" %s", buf[i]);
+    printf("%c", buf[i]);
     // On older compilers use --> printf(" %02X", (unsigned) ptr[i]);
   }
 }
