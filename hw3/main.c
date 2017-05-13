@@ -30,7 +30,7 @@ void read_from_reader(void * pn){
   size_t nbytes = sizeof(buf-1);
   ssize_t bytesread;
   int filedesc = STDIN_FILENO;
-  bytesread= read(filedesc, buf, nbytes);
+  bytesread= read_wrap(filedesc, buf, nbytes);
   for (int i = 0; i < nbytes; i++) {
     printf("%c", buf[i]);
   }
