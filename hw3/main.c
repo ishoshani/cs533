@@ -44,6 +44,7 @@ void read_from_file(void * offsetpn) {
   size_t nbytes = sizeof(buf);
   ssize_t bytesread;
   int filedesc = open("reader.txt", O_RDONLY);
+  off_t offsetbytes = lseek(filedesc,offset,SEEK_CUR);
   bytesread= read_wrap(filedesc, buf, nbytes);
   for (int i = 0; i < nbytes; i++) {
     printf("%c", buf[i]);
