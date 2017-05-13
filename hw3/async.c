@@ -1,4 +1,3 @@
-#include "scheduler.h"
 #include <stdlib.h>
 #include <stdio.h>
 #include <aio.h>
