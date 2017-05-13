@@ -60,7 +60,7 @@ int main(void) {
   thread_fork(print_nth_prime, &n2);
   thread_fork(print_nth_prime, &n3);
   thread_fork(read_from_user, &n3);
-  thread_fork(read_from_file,&o5);
+  //thread_fork(read_from_file,&o5);
 
 
   scheduler_end();
