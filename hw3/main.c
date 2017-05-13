@@ -1,4 +1,5 @@
 #include "scheduler.h"
+##include "async.h"
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
