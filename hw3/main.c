@@ -26,7 +26,7 @@ void print_nth_prime(void * pn){
 
 }
 
-void read_from_reader(){
+void read_from_reader(void * pn){
   char buf[5];
   size_t nbytes = sizeof(buf-1);
   ssize_t bytesread;
@@ -48,7 +48,7 @@ int main(void) {
   thread_fork(print_nth_prime, &n1);
   thread_fork(print_nth_prime, &n2);
   thread_fork(print_nth_prime, &n3);
-  thread_fork(read_from_reader);
+  thread_fork(read_from_reader, &n3);
 
 
   scheduler_end();
