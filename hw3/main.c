@@ -43,7 +43,7 @@ void read_from_file(void * offsetpn) {
   char buf[20];
   size_t nbytes = sizeof(buf-1);
   ssize_t bytesread;
-  int filedesc = open(reader.txt, O_RDONLY);
+  int filedesc = open("reader.txt", O_RDONLY);
   bytesread= read_wrap(filedesc, buf, nbytes);
   for (int i = 0; i < nbytes; i++) {
     printf("%c", buf[i]);
