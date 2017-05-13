@@ -9,7 +9,7 @@ void read_from_reader(void * pn){
   size_t nbytes = sizeof(buf-1);
   ssize_t bytesread;
   int filedesc = open("reader.txt",O_RDONLY);
-  bytes read= (filedesc, buf, nbytes);
+  bytesread= read(filedesc, buf, nbytes);
   for (i = 0; i < nbytes; i++) {
     printf(" %02hhX", buf[i]);
   }
