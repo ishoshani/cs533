@@ -26,13 +26,13 @@ void print_nth_prime(void * pn){
 
 }
 
-void read_from_reader(void * pn){
+void read_from_reader(){
   char buf[5];
   size_t nbytes = sizeof(buf-1);
   ssize_t bytesread;
   int filedesc = STDIN_FILENO;
   bytesread= read(filedesc, buf, nbytes);
-  for (i = 0; i < nbytes; i++) {
+  for (int i = 0; i < nbytes; i++) {
     printf("%c", buf[i]);
   }
   printf("\n");
@@ -48,6 +48,7 @@ int main(void) {
   thread_fork(print_nth_prime, &n1);
   thread_fork(print_nth_prime, &n2);
   thread_fork(print_nth_prime, &n3);
+  thread_fork(read_from_reader);
 
 
   scheduler_end();
