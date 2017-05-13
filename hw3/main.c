@@ -46,7 +46,7 @@ void read_from_file(void * offsetpn) {
   ssize_t bytesread,asyncbytesRead;
   int filedesc = open("reader.txt", O_RDONLY);
   off_t offsetbytes = lseek(filedesc,offset,SEEK_CUR);
-  bytesread = read(filedesc,buf,nbytes)
+  bytesread = read(filedesc,buf,nbytes);
   asyncbytesRead= read_wrap(filedesc, abuf, nbytes);
 
   for (int i = 0; i < nbytes; i++) {
