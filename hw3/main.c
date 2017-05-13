@@ -40,18 +40,27 @@ void read_from_user(void * pn){
 
 void read_from_file(void * offsetpn) {
   int offset = *(int *) offsetpn;
-  
+  char buf[20];
+  size_t nbytes = sizeof(buf-1);
+  ssize_t bytesread;
+  int filedesc = open(reader.txt, O_RDONLY);
+  bytesread= read_wrap(filedesc, buf, nbytes);
+  for (int i = 0; i < nbytes; i++) {
+    printf("%c", buf[i]);
+  }
+  printf("\n");
 }
 
 
 int main(void) {
   scheduler_begin();
 
-  int n1 = 20000, n2 = 10000, n3 = 30000;
+  int n1 = 20000, n2 = 10000, n3 = 30000, o5 = 0;
   thread_fork(print_nth_prime, &n1);
   thread_fork(print_nth_prime, &n2);
   thread_fork(print_nth_prime, &n3);
   thread_fork(read_from_user, &n3);
+  thread_fork(read_from_file,&o5);
 
 
   scheduler_end();
