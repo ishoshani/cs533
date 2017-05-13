@@ -1,6 +1,7 @@
 #include "scheduler.h"
 #include <stdio.h>
 #include <fcntl.h>
+#include <unistd.h>
 
 void read_from_reader(void * pn){
   printf("goooo\n");
