@@ -52,9 +52,13 @@ void read_from_file(void * offsetpn) {
   for (int i = 0; i < nbytes; i++) {
     printf("%c", buf[i]);
   }
+  printf("\n");
+
   for (int i = 0; i < nbytes; i++) {
     printf("%c", abuf[i]);
   }
+  printf("\n");
+
   fputs((asyncbytesRead==bytesread) ? "true" : "false", stdout);
 
   printf("\n");
