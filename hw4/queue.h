@@ -6,12 +6,12 @@
  * any changes you make.
  */
 
-struct queue_node {
+typedef struct queue_node {
   struct thread * t;
-  struct queue_node * next;  
+  struct queue_node * next;
 };
 
-struct queue {
+typedef struct queue {
   struct queue_node * head;
   struct queue_node * tail;
 };

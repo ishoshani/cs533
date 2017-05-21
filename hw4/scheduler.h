@@ -26,12 +26,12 @@ typedef struct thread{
 extern struct thread * current_thread;
 
 //struct Mutex
-struct mutex {
+typedef struct mutex {
      int held;
      struct queue waiting_threads;
    };
 //Struct conditional variable
-struct condition {
+typedef struct condition {
      struct queue waiting_threads;
    };
 //Function prototypes
