@@ -29,11 +29,11 @@ extern struct thread * current_thread;
 typedef struct mutex {
      int held;
      struct queue waiting_threads;
-   };
+   }mutex;
 //Struct conditional variable
 typedef struct condition {
      struct queue waiting_threads;
-   };
+   }condition;
 //Function prototypes
 void scheduler_begin();
 void thread_fork(void(*target)(void*), void * arg);
