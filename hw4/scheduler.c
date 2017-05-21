@@ -193,7 +193,7 @@ void condition_wait(struct condition * cond, struct mutex * mtx){
 void condition_signal(struct condition * cond){
   struct thread * next_thread = thread_dequeue(cond->waiting_threads);
   next_thread->state = READY;
-  thread_enqueue(ready_list, next_thread)
+  thread_enqueue(ready_list, next_thread);
 }
 
 void condition_broadcast(struct condition * cond){
