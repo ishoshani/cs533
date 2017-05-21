@@ -44,11 +44,11 @@ void thread_switch(struct thread * old, struct thread * new);
 void thread_start(struct thread * old, struct thread * new);
 //void thread_wrap();
 
-void mutex_init(struct mutex * mtx)
-void mutex_lock(struct mutex * mtx)
-void mutex_unlock(struct mutex * mtx)
+void mutex_init(struct mutex * mtx);
+void mutex_lock(struct mutex * mtx);
+void mutex_unlock(struct mutex * mtx);
 
-void condition_init(struct condition * cond)
-void condition_wait(struct condition * cond, struct mutex * mtx)
-void condition_signal(struct condition * cond)
-void condition_broadcast(struct condition * cond)
+void condition_init(struct condition * cond);
+void condition_wait(struct condition * cond, struct mutex * mtx);
+void condition_signal(struct condition * cond);
+void condition_broadcast(struct condition * cond);
