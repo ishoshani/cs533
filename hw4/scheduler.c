@@ -155,44 +155,44 @@ void scheduler_end(){
   printf("Scheduler ends here ....\n");                                    //this line is printed at the end when all threads have finished running
 }
 
-void mutex_init(struct mutex *){
-  mutex->held = 0;
-  mutex->waiting_threads = malloc(sizeof(struct queue));
+void mutex_init(struct mutex * mtx){
+  mtx->held = 0;
+  mtx->waiting_threads = malloc(sizeof(struct queue));
 }
-void mutex_lock(struct mutex *){
-  if(mutex->held == 1){
+void mutex_lock(struct mutex * mtx){
+  if(mtx->held == 1){
     current_thread->state = BLOCKED;
-    thread_enqueue(mutex->waiting_threads,current_thread);
+    thread_enqueue(mtx->waiting_threads,current_thread);
     yield();
   }
-  mutex->held = 1;
+  mtx->held = 1;
 }
-void mutex_unlock(struct mutex *){
-  struct thread * next_thread = thread_dequeue(mutex->waiting_threads);
+void mutex_unlock(struct mutex * mtx){
+  struct thread * next_thread = thread_dequeue(mtx->waiting_threads);
   if(next_thread){
     next_thread->state = READY;
     thread_enqueue(ready_list,next_thread);
   }else{
-    held = 0;
+    mtx->held = 0;
   }
 }
 
-void condition_init(struct condition *){
-  condition->waiting_threads = malloc(sizeof(struct queue));
+void condition_init(struct condition * cond){
+  cond->waiting_threads = malloc(sizeof(struct queue));
 }
-void condition_wait(struct condition *, struct mutex *){
-  mutex_unlock(mutex);
+void condition_wait(struct condition * cond, struct mutex * mtx){
+  mutex_unlock(mtx);
   current_thread->state = BLOCKED;
   yield();
-  mutex_lock(mutex);
+  mutex_lock(mtx);
 }
-void condition_signal(struct condition *){
-  struct thread * next_thread = thread_dequeue(condition->waiting_threads);
+void condition_signal(struct condition * cond){
+  struct thread * next_thread = thread_dequeue(cond->waiting_threads);
   next_thread->state = READY;
   thread_enqueue(ready_list, next_thread)
 }
-void condition_broadcast(struct condition *){
-  while(!is_empty(condition->waiting_threads)){
-    condition_signal(condition);
+void condition_broadcast(struct condition * cond){
+  while(!is_empty(cond->waiting_threads)){
+    condition_signal(cond);
   }
 }
