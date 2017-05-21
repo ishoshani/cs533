@@ -26,6 +26,7 @@ void thread_wrap() {
     current_thread->initial_function(current_thread->initial_argument);
     current_thread->state = DONE;
     thread_enqueue(done_list,current_thread);
+    condition_broadcast(current_thread->thread_conditional);
     printf("Thread %d is DONE ...\n\n",current_thread->name);
     yield();
     printf("Finish thread_wrap ...\n");                                       //this is never printed because scheduler doesn't execute a thread once its                                                                                 state is DONE
