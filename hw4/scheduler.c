@@ -45,11 +45,7 @@ void scheduler_begin(){
   printf("Scheduler initialized ...\n");
   current_thread = (struct thread*)malloc(sizeof(struct thread));             //allocate space for current_thread TCB
   temp_thread = current_thread;                                               //temporary holder so it can be free'd the end
-  current_thread->state = RUNNING;
-  current_thread->thread_mutex = (struct mutex*)malloc(sizeof(struct mutex));
-  mutex_init(current_thread->thread_mutex);
-  current_thread->thread_conditional = (struct condition*)malloc(sizeof(struct thread));
-  condition_init(current_thread->thread_conditional);                                        //initialize state to RUNNING
+  current_thread->state = RUNNING;                                //initialize state to RUNNING
   ready_list=malloc(sizeof(struct queue));                                    //initialize ready_list and set head and tail to NULL
   done_list=malloc(sizeof(struct queue));                                     //initialize done_list and set head and tail to NULL
   ready_list->head = NULL;
