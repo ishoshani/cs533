@@ -68,7 +68,7 @@ void scheduler_begin(){
 /* new current thread as new                                       */
 /*******************************************************************/
 
-void thread_fork(void(*target)(void*), void * arg){
+thread * thread_fork(void(*target)(void*), void * arg){
 
   printf("Thread %d is forked ...\n", thNum);
 
@@ -91,6 +91,7 @@ void thread_fork(void(*target)(void*), void * arg){
   current_thread =  new_thread;
 
   thread_start(temp,current_thread);
+  return new_thread;
 }
 
 /*******************************************************************/
@@ -203,5 +204,5 @@ void condition_broadcast(struct condition * cond){
 }
 
 void thread_join(struct thread* joining_thread){
-  return;
+
 }

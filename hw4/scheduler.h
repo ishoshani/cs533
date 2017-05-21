@@ -38,7 +38,7 @@ typedef struct condition {
    }condition;
 //Function prototypes
 void scheduler_begin();
-void thread_fork(void(*target)(void*), void * arg);
+thread * thread_fork(void(*target)(void*), void * arg);
 void yield();
 void scheduler_end();
 
