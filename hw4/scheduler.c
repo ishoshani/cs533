@@ -80,6 +80,10 @@ thread * thread_fork(void(*target)(void*), void * arg){
   new_thread->initial_argument=arg;
   new_thread->initial_function=target;
   new_thread->name = thNum;
+  new_thread->thread_mutex = (struct mutex*)malloc(sizeof(struct mutex));
+  mutex_init(new_thread->thread_mutex);
+  new_thread->thread_conditional = (struct conditional*)malloc(sizeof(struct thread));
+  condition_init(new_thread->thread_conditional);
   thNum++;
 
   current_thread->state = READY;
@@ -118,9 +122,6 @@ void yield(){
   else if (current_thread->state != DONE){
     current_thread->state = READY;
     thread_enqueue(ready_list,current_thread);
-  }
-  else if(current_thread->state == DONE){
-    condition_broadcast(current_thread->thread_conditional);
   }
 
   struct thread *next_thread = thread_dequeue(ready_list);
