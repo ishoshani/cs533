@@ -1,0 +1,16 @@
+Report:
+I created the async library file along side some thread functions. I think most of the work was actually just reading through
+the man pages for the libraries for AIO. It seems to mostly handle itself. The important things were to not set an offsetbytes
+for non-offsettable sources(pipes,etc) and to make sure to use LSeek to set the offset otherwise, since AIO has an offset option.
+in it. When I tested it to make sure that I was getting the same thing from each one, I found that they completed the line for eachother,
+so I took that as good enough. I don't know if I did enough in setting the Errno, but it seems like it should manage to return
+the correct error on its own, and we just need to set the errno to the correct thing. I don't know if I need to throw an error or something
+if C does that.
+Discussion:
+1. Yes? I think our environment is a uniprocessor, so as long as we don't yield and nobody can make us yield, we have
+memory invariance on what we are accessing since nobody else can even get on the processor.
+2. It would need its another queue or data structure for the blocked on I/O threads. When a signal is passed, that signal contains
+which thread-id sent in the request and the completion code so that thread can then be moved onto the ready list. Of course, now the
+signals are concurrent, we don't want them to put to mess up which threads are on the blocked for IO queue and which ones are ready. We don't want
+two signals heading for the same thread, and we need to make sure that signals get access to both kinds of queues without having
+to wait indefinetly for the other one.
