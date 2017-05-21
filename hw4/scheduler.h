@@ -18,6 +18,8 @@ typedef struct thread{
   unsigned char* stack_pointer;
   void (*initial_function)(void*);
   void* initial_argument;
+  struct mutex * thread_mutex;
+  struct condition * thread_conditional;
   state_t state;
   unsigned char* temp_sp_holder;
   int name;
@@ -52,3 +54,5 @@ void condition_init(struct condition * cond);
 void condition_wait(struct condition * cond, struct mutex * mtx);
 void condition_signal(struct condition * cond);
 void condition_broadcast(struct condition * cond);
+
+void thread_join(struct thread* joining_thread);

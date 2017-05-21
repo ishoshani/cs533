@@ -201,3 +201,7 @@ void condition_broadcast(struct condition * cond){
     condition_signal(cond);
   }
 }
+
+void thread_join(struct thread* joining_thread){
+  return;
+}
