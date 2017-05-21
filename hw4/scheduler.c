@@ -30,7 +30,6 @@ void thread_wrap() {
     printf("Thread %d is DONE ...\n\n",current_thread->name);
     yield();
     printf("Finish thread_wrap ...\n");                                       //this is never printed because scheduler doesn't execute a thread once its                                                                                 state is DONE
-    exit(1);
 }
 
 /*******************************************************************/
