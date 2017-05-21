@@ -159,6 +159,7 @@ void mutex_init(struct mutex * mtx){
   mtx->held = 0;
   mtx->waiting_threads = malloc(sizeof(struct queue));
 }
+
 void mutex_lock(struct mutex * mtx){
   if(mtx->held == 1){
     current_thread->state = BLOCKED;
