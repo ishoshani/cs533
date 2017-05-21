@@ -82,7 +82,7 @@ thread * thread_fork(void(*target)(void*), void * arg){
   new_thread->name = thNum;
   new_thread->thread_mutex = (struct mutex*)malloc(sizeof(struct mutex));
   mutex_init(new_thread->thread_mutex);
-  new_thread->thread_conditional = (struct conditional*)malloc(sizeof(struct thread));
+  new_thread->thread_conditional = (struct condition*)malloc(sizeof(struct thread));
   condition_init(new_thread->thread_conditional);
   thNum++;
 
