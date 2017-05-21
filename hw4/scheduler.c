@@ -119,6 +119,9 @@ void yield(){
     current_thread->state = READY;
     thread_enqueue(ready_list,current_thread);
   }
+  else if(current_thread->state == DONE){
+    condition_broadcast(current_thread->thread_conditional);
+  }
 
   struct thread *next_thread = thread_dequeue(ready_list);
   if(next_thread){
@@ -204,5 +207,7 @@ void condition_broadcast(struct condition * cond){
 }
 
 void thread_join(struct thread* joining_thread){
-
+  while(joining_thread->state != DONE){
+    condition_wait(joining_thread->thread_conditional, joining_thread->thread_mutex);
+  }
 }
