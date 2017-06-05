@@ -1,10 +1,12 @@
 /****************************************/
-/* Liz Lawrens                          */
+/* Based on work by Liz Lawrens                          */
 /* CS533 Assignment 2                   */
 /* Spring 2017                          */
 /* Round Robin Scheduling               */
 /* Header file with function prototypes */
 /****************************************/
+
+#define current_thread (get_current_thread())
 
 typedef enum {
     RUNNING, // The thread is currently running.

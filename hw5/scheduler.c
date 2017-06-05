@@ -6,7 +6,8 @@
 #include <stdio.h>
 #include "scheduler.h"
 #include "queue.h"
-
+#define _GNU_SOURCE
+#include <sched.h>
 #define STACK_SIZE 1024*1024
 
 struct thread * current_thread;
@@ -43,7 +44,7 @@ void thread_wrap() {
 
 void scheduler_begin(){
   printf("Scheduler initialized ...\n");
-  current_thread = (struct thread*)malloc(sizeof(struct thread));             //allocate space for current_thread TCB
+  set_current_thread((struct thread*)malloc(sizeof(struct thread)));             //allocate space for current_thread TCB
   temp_thread = current_thread;                                               //temporary holder so it can be free'd the end
   current_thread->state = RUNNING;                                //initialize state to RUNNING
   ready_list=malloc(sizeof(struct queue));                                    //initialize ready_list and set head and tail to NULL
@@ -93,7 +94,7 @@ thread * thread_fork(void(*target)(void*), void * arg){
   new_thread->state = RUNNING;
 
   struct thread * temp = current_thread;
-  current_thread =  new_thread;
+  set_current_thread(new_thread);
 
   thread_start(temp,current_thread);
   return new_thread;
@@ -129,7 +130,7 @@ void yield(){
   if(next_thread){
     struct thread * temp = current_thread;
     next_thread->state = RUNNING;
-    current_thread = next_thread;
+    set_current_thread(next_thread);
     thread_switch(temp,current_thread);
   }
 
