@@ -65,7 +65,7 @@ int kernel_thread_begin(void * arg){
   temp->state = RUNNING;
   set_current_thread(temp);
   //we don't need to set an inital function or stack because those are supplied by the user threads.
-  while (true) yield();
+  while (1) yield();
 }
 
 /*******************************************************************/
