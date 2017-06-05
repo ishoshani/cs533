@@ -53,6 +53,21 @@ void scheduler_begin(){
   ready_list->tail = NULL;
   done_list->head = NULL;
   done_list->tail = NULL;
+  unsigned char* kernel_s_pointer=(unsigned char*)malloc(STACK_SIZE);
+  clone(&kernel_thread_begin, //starting function
+        kernel_s_pointer, //child stack
+        CLONE_THREAD | CLONE_VM | CLONE_SIGHAND | CLONE_FILES | CLONE_FS | CLONE_IO, //flags
+        void);// no initial argument
+)){
+  }
+}
+
+void kernel_thread_begin(){
+  struct thread temp = ((struct thread*)malloc(sizeof(struct thread)));
+  temp->state = RUNNING;
+  set_current_thread(temp);
+  //we don't need to set an inital function or stack because those are supplied by the user threads.
+  while (true) {yield()}
 }
 
 /*******************************************************************/
