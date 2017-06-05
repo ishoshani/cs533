@@ -62,7 +62,7 @@ void scheduler_begin(){
   }
 }
 
-void kernel_thread_begin(){
+int kernel_thread_begin(void*){
   struct thread temp = ((struct thread*)malloc(sizeof(struct thread)));
   temp->state = RUNNING;
   set_current_thread(temp);

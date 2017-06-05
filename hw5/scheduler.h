@@ -19,8 +19,6 @@ typedef enum {
 
 
 
-extern struct thread * get_current_thread();
-extern void set_current_thread(struct thread *);
 
 
 //Struct thread
@@ -36,6 +34,13 @@ typedef struct thread{
 }thread;
 
 extern struct thread * current_thread;
+
+//Kernel_thread stuff
+
+extern struct thread * get_current_thread();
+extern void set_current_thread(struct thread * t);
+int kernel_thread_begin(void* arg)
+
 
 //struct Mutex
 typedef struct mutex {
