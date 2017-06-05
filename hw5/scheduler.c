@@ -57,7 +57,7 @@ void scheduler_begin(){
   clone(&kernel_thread_begin, //starting function
         kernel_s_pointer, //child stack
         CLONE_THREAD | CLONE_VM | CLONE_SIGHAND | CLONE_FILES | CLONE_FS | CLONE_IO, //flags
-        void);// no initial argument
+        NULL);// no initial argument
 )){
   }
 }
