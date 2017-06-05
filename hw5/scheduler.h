@@ -6,7 +6,8 @@
 /* Header file with function prototypes */
 /****************************************/
 
-
+#define _GNU_SOURCE
+#include <sched.h>
 #define current_thread (get_current_thread())
 
 typedef enum {
