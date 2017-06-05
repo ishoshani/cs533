@@ -2,12 +2,12 @@
 /* Scheduler based on solution by Liz Lawrens
 /****************************************/
 
+#define _GNU_SOURCE
+#include <sched.h>
 #include <stdlib.h>
 #include <stdio.h>
 #include "scheduler.h"
 #include "queue.h"
-#define _GNU_SOURCE
-#include <sched.h>
 #define STACK_SIZE 1024*1024
 
 struct thread * current_thread;
