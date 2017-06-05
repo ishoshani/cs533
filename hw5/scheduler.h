@@ -7,9 +7,6 @@
 /****************************************/
 
 
-extern struct thread * get_current_thread();
-extern void set_current_thread(struct thread*);
-
 #define current_thread (get_current_thread())
 
 typedef enum {
@@ -18,6 +15,12 @@ typedef enum {
     BLOCKED, // The thread is not running, and not runnable.
     DONE     // The thread has finished.
 } state_t;
+
+
+
+extern struct thread * get_current_thread();
+extern void set_current_thread(struct thread*);
+
 
 //Struct thread
 typedef struct thread{
