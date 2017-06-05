@@ -6,6 +6,10 @@
 /* Header file with function prototypes */
 /****************************************/
 
+
+extern struct thread * get_current_thread();
+extern void set_current_thread(struct thread*);
+
 #define current_thread (get_current_thread())
 
 typedef enum {
@@ -58,6 +62,3 @@ void condition_signal(struct condition * cond);
 void condition_broadcast(struct condition * cond);
 
 void thread_join(struct thread* joining_thread);
-
-extern struct thread * get_current_thread();
-extern void set_current_thread(struct thread*);
