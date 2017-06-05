@@ -23,7 +23,7 @@ ssize_t read_wrap(int fd, void * buf, size_t count){
     yield();
   }
   if(errorval==ECANCELED){
-    errno=EECANCELED;
+    errno=ECANCELED;
   }
   if(errorval>0){
     errno=errorval;
