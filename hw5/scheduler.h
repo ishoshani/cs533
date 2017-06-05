@@ -39,7 +39,7 @@ extern struct thread * current_thread;
 
 extern struct thread * get_current_thread();
 extern void set_current_thread(struct thread * t);
-int kernel_thread_begin(void* arg);
+int kernel_thread_begin(void * arg);
 
 
 //struct Mutex
