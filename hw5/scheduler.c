@@ -61,7 +61,7 @@ void scheduler_begin(){
 }
 
 int kernel_thread_begin(void * arg){
-  struct thread temp = ((struct thread*)malloc(sizeof(struct thread)));
+  struct thread * temp = (struct thread*)malloc(sizeof(struct thread));
   temp->state = RUNNING;
   set_current_thread(temp);
   //we don't need to set an inital function or stack because those are supplied by the user threads.
