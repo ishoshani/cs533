@@ -19,7 +19,7 @@ typedef enum {
 
 
 extern struct thread * get_current_thread();
-extern void set_current_thread(struct thread*);
+extern void set_current_thread(struct thread *);
 
 
 //Struct thread
