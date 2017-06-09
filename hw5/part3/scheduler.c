@@ -137,7 +137,7 @@ thread * thread_fork(void(*target)(void*), void * arg){
   set_current_thread(new_thread);
 
   thread_start(temp,current_thread);
-  spinlock_unlock(&ready_listLock)
+  spinlock_unlock(&ready_listLock);
 
   return new_thread;
 }
@@ -160,6 +160,7 @@ void yield(){
   if( current_thread->state == BLOCKED){
     spinlock_lock(&ready_listLock);
     if(is_empty(ready_list)){
+      spinlock_unlock(&ready_listLock);
       printf("%s\n", "Cannot yield a blocking thread with nothing in ready list");
       exit(1);
     }
@@ -170,16 +171,17 @@ void yield(){
     spinlock_lock(&ready_listLock);
     thread_enqueue(ready_list,current_thread);
     spinlock_unlock(&ready_listLock);
-
   }
-
+  spinlock_lock(&ready_listLock);
   struct thread *next_thread = thread_dequeue(ready_list);
+  spinlock_unlock(&ready_listLock);
+
   if(next_thread){
     struct thread * temp = current_thread;
     next_thread->state = RUNNING;
     set_current_thread(next_thread);
     thread_switch(temp,current_thread);
-    spinlock_unlock(&ready_listLock)
+    spinlock_unlock(&ready_listLock);
   }
 
 }
