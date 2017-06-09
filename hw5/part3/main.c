@@ -5,7 +5,7 @@
 #include "async.h"
 #include "scheduler.h"
 
-AO_TS_t * print_lock;
+AO_TS_t print_lock;
 
 void print_nth_prime(void * pn){
   spinlock_lock(&print_lock);
