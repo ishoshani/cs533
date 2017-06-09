@@ -10,10 +10,9 @@
 #include "queue.h"
 #include "scheduler.h"
 
-#define STACK_SIZE 1024*1024
 #undef malloc
 #undef free
-    void * safe_mem(int op, void * arg) {
+void * safe_mem(int op, void * arg) {
       static AO_TS_t spinlock = AO_TS_INITIALIZER;
       void * result = 0;
 
@@ -28,6 +27,8 @@
     }
 #define malloc(arg) safe_mem(0, ((void*)(arg)))
 #define free(arg) safe_mem(1, arg)
+
+#define STACK_SIZE 1024*1024
 
 struct thread * current_thread;
 struct thread * temp_thread;
