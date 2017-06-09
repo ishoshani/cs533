@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
+#include<atomic_ops>
 #include "scheduler.h"
 
 int shared_count = 0;
