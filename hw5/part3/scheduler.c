@@ -127,8 +127,8 @@ thread * thread_fork(void(*target)(void*), void * arg){
   new_thread->thread_conditional = (struct condition*)malloc(sizeof(struct thread));
   condition_init(new_thread->thread_conditional);
   thNum++;
-
   current_thread->state = READY;
+  spinlock_lock(&ready_listLock);
   thread_enqueue(ready_list,current_thread);
 
   new_thread->state = RUNNING;
@@ -164,22 +164,18 @@ void yield(){
       printf("%s\n", "Cannot yield a blocking thread with nothing in ready list");
       exit(1);
     }
-    spinlock_unlock(&ready_listLock);
   }                                                        //can't really put any print statement here as its going to be printed a million                                                                             times :)
   else if (current_thread->state != DONE){
     current_thread->state = READY;
-    spinlock_lock(&ready_listLock);
     thread_enqueue(ready_list,current_thread);
-    spinlock_unlock(&ready_listLock);
   }
-  spinlock_lock(&ready_listLock);
   struct thread *next_thread = thread_dequeue(ready_list);
-  spinlock_unlock(&ready_listLock);
 
   if(next_thread){
     struct thread * temp = current_thread;
     next_thread->state = RUNNING;
     set_current_thread(next_thread);
+    spinlock_unlock(&ready_listLock);
     thread_switch(temp,current_thread);
     spinlock_unlock(&ready_listLock);
   }
@@ -199,7 +195,6 @@ void scheduler_end(){
   while(!is_empty(ready_list)){
     spinlock_unlock(&ready_listLock);
     yield();
-    spinlock_lock(&ready_listLock);
   }
   spinlock_unlock(&ready_listLock);
 
