@@ -6,7 +6,7 @@
  * any changes you make.
  */
 
- extern void * safe_mem(int, void*);
+extern void * safe_mem(int, void*);
 #define malloc(arg) safe_mem(0, ((void*)(arg)))
 #define free(arg) safe_mem(1, arg)
 #include "queue.h"

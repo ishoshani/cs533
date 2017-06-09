@@ -5,13 +5,13 @@
 /* Round Robin Scheduling               */
 /* Header file with function prototypes */
 /****************************************/
-
-#define _GNU_SOURCE
-#include <sched.h>
-#define current_thread (get_current_thread())
 extern void * safe_mem(int, void*);
 #define malloc(arg) safe_mem(0, ((void*)(arg)))
 #define free(arg) safe_mem(1, arg)
+#define _GNU_SOURCE
+#include <sched.h>
+#define current_thread (get_current_thread())
+
 
 typedef enum {
     RUNNING, // The thread is currently running.
