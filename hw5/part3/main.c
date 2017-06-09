@@ -5,9 +5,13 @@
 #include "async.h"
 #include "scheduler.h"
 
+AO_TS_t * print_lock;
 
 void print_nth_prime(void * pn){
+  spinlock_lock(&print_lock)
   printf("goooo");
+  spinlock_unlock(&print_lock)
+
 	int n = *(int *) pn;
   int c = 1, i = 1;
   while(c <= n) {
@@ -24,7 +28,10 @@ void print_nth_prime(void * pn){
     }
     yield();
   }
+  spinlock_lock(&print_lock)
   printf("%dth prime: %d\n", n, i);
+  spinlock_unlock(&print_lock)
+
 
 }
 
@@ -35,7 +42,10 @@ void read_from_user(void * pn){
   int filedesc = STDIN_FILENO;
   bytesread= read_wrap(filedesc, buf, nbytes);
   for (int i = 0; i < nbytes; i++) {
+    spinlock_lock(&print_lock);
     printf("%c", buf[i]);
+    spinlock_unlock(&print_lock);
+
   }
   printf("\n");
 }
@@ -52,14 +62,26 @@ void read_from_file(void * offsetpn) {
   asyncbytesRead= read_wrap(filedesc, abuf, nbytes);
 
   for (int i = 0; i < nbytes; i++) {
+    spinlock_lock(&print_lock);
     printf("%c", buf[i]);
+    spinlock_unlock(&print_lock);
+
   }
+  spinlock_lock(&print_lock)
   printf("\n");
+  spinlock_unlock(&print_lock)
+
 
   for (int i = 0; i < nbytes; i++) {
+    spinlock_lock(&print_lock);
     printf("%c", abuf[i]);
+    spinlock_unlock(&print_lock);
+
   }
+  spinlock_lock(&print_lock);
   printf("\n");
+  spinlock_unlock(&print_lock);
+
 
   fputs((asyncbytesRead==bytesread) ? "true" : "false", stdout);
 
@@ -68,6 +90,7 @@ void read_from_file(void * offsetpn) {
 
 
 int main(void) {
+  print_lock = AO_TS_INITIALIZER
   scheduler_begin();
 
   int n1 = 20000, n2 = 10000, n3 = 30000, o5 = 3;
