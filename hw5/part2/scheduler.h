@@ -9,6 +9,8 @@
 #define _GNU_SOURCE
 #include <sched.h>
 #define current_thread (get_current_thread())
+#define malloc(arg) safe_mem(0, ((void*)(arg)))
+#define free(arg) safe_mem(1, arg)
 
 typedef enum {
     RUNNING, // The thread is currently running.
@@ -17,6 +19,7 @@ typedef enum {
     DONE     // The thread has finished.
 } state_t;
 
+extern void * safe_mem(int, void*);
 
 
 
