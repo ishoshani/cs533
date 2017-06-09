@@ -67,7 +67,7 @@ void read_from_file(void * offsetpn) {
     spinlock_unlock(&print_lock);
 
   }
-  spinlock_lock(&print_lock)''
+  spinlock_lock(&print_lock);
   printf("\n");
   spinlock_unlock(&print_lock);
 
