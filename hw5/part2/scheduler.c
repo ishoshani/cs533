@@ -7,9 +7,9 @@
 #include <stdlib.h>
 #include <stdio.h>
 #include <atomic_ops.h>
-
-#include "scheduler.h"
 #include "queue.h"
+#include "scheduler.h"
+
 #define STACK_SIZE 1024*1024
 #undef malloc
 #undef free
