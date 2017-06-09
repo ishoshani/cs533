@@ -6,6 +6,8 @@
 #include <sched.h>
 #include <stdlib.h>
 #include <stdio.h>
+#include <atomic_ops.h>
+
 #include "scheduler.h"
 #include "queue.h"
 #define STACK_SIZE 1024*1024
