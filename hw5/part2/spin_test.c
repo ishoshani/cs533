@@ -29,10 +29,10 @@
 #include <string.h>
 
 void spinlock_lock(AO_TS_t * lock) {
-    while(AO_test_and_set_acquire(spinner));
+    while(AO_test_and_set_acquire(lock));
 }
 void spinlock_unlock(AO_TS_t * lock) {
-  AO_CLEAR(spinner);
+  AO_CLEAR(lock);
 }
 
 int shared_counter;
