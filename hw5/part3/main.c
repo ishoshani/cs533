@@ -1,6 +1,7 @@
 #include <stdio.h>
 #include <fcntl.h>
 #include <unistd.h>
+#include <atomic_ops.h>
 #include "async.h"
 #include "scheduler.h"
 
